@@ -27,7 +27,7 @@ class ProductModel {
 
   public update = async (id: number, orderId: number): Promise<void> => {
     const query = 'UPDATE Trybesmith.Products SET orderId = ? WHERE id = ?';
-    await this.connection.execute(query, [orderId, id]);
+    await this.connection.execute<ResultSetHeader>(query, [orderId, id]);
   };
 
   public findOrderById = async (id: number): Promise<number[]> => {

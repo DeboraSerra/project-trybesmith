@@ -1,5 +1,5 @@
 import { Pool, ResultSetHeader, RowDataPacket } from 'mysql2/promise';
-import { User } from '../interfaces/interface';
+import { User, UserIndex } from '../interfaces/interface';
 
 class UserModel {
   connection: Pool;
@@ -8,10 +8,10 @@ class UserModel {
     this.connection = connection;
   }
 
-  public findOne = async (username: string): Promise<User> => {
+  public findOne = async (username: string): Promise<UserIndex> => {
     const query = 'SELECT * FROM Trybesmith.Users WHERE username = ?';
     const [[person]] = await this.connection.execute<RowDataPacket[]>(query, [username]);
-    return person as User;
+    return person as UserIndex;
   };
 
   public create = async (user: User): Promise<User> => {

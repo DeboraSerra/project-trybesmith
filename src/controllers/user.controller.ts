@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import jwt from 'jsonwebtoken';
+import jwt, { SignOptions } from 'jsonwebtoken';
 import UserService from '../services/user.service';
 import RequiredError from '../errors/requiredError';
 import UnauthorizedError from '../errors/tokenError';
@@ -8,7 +8,11 @@ import { User } from '../interfaces/interface';
 export const secret = 'prjectTrybeSmith';
 
 const createToken = (data: User) => {
-  const token = jwt.sign({ data }, secret);
+  const jwtConfig: SignOptions = {
+    expiresIn: '7d',
+    algorithm: 'HS256',
+  };
+  const token = jwt.sign({ data }, secret, jwtConfig);
   return token;
 };
 

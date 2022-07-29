@@ -1,3 +1,5 @@
+import { Request } from 'express';
+
 export interface Product {
   id?: number;
   name: string;
@@ -6,7 +8,7 @@ export interface Product {
 }
 
 export interface Order {
-  id: number;
+  id?: number;
   userId: number;
   productsIds?: Array<number>;
 }
@@ -17,4 +19,21 @@ export interface User {
   classe: string;
   level: number;
   password?: string;
+}
+
+export interface UserIndex {
+  id: number;
+  username: string;
+  classe: string;
+  level: number;
+  password?: string;
+}
+
+export interface ReqUser extends Request {
+  user?: {
+    id: number;
+    username: string;
+    classe: string;
+    level: number;
+  };
 }

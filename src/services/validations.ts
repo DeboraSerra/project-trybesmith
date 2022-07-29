@@ -79,3 +79,15 @@ export const validateUser = (user: User): void => {
   validateLevel(level);
   validatePass(password);
 };
+
+export const validateOrder = (productsIds: number[]): void => {
+  if (!productsIds) {
+    throw new RequiredError('"productsIds" is required');
+  }
+  if (!Array.isArray(productsIds)) {
+    throw new WrongFieldError('"productsIds" must be an array');
+  }
+  if (productsIds.some((id) => typeof id !== 'number') || productsIds.length === 0) {
+    throw new WrongFieldError('"productsIds" must include only numbers');
+  }
+};

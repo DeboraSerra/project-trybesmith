@@ -1,6 +1,6 @@
 import connection from '../models/connection';
 import UserModel from '../models/user.model';
-import { User } from '../interfaces/interface';
+import { User, UserIndex } from '../interfaces/interface';
 import { validateUser } from './validations';
 
 class UserService {
@@ -10,7 +10,7 @@ class UserService {
     this.model = new UserModel(connection);
   }
 
-  public findOne = async (username: string): Promise<User> => {
+  public findOne = async (username: string): Promise<UserIndex> => {
     const user = await this.model.findOne(username);
     return user;
   };
