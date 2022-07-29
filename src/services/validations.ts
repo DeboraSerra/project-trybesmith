@@ -41,14 +41,14 @@ const validateClasse = (classe: string): void => {
 };
 
 const validateLevel = (level: number): void => {
+  if (level <= 0) {
+    throw new WrongFieldError('"level" must be greater than or equal to 1');
+  }
   if (!level) {
     throw new RequiredError('"level" is required');
   }
   if (typeof level !== 'number') {
     throw new WrongFieldError('"level" must be a number');
-  }
-  if (level <= 0) {
-    throw new WrongFieldError('"level" must be greater than or equal to 1');
   }
 };
 
