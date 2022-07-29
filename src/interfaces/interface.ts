@@ -6,8 +6,9 @@ export interface Product {
 }
 
 export interface Order {
-  id?: number;
+  id: number;
   userId: number;
+  productsIds?: Array<number>;
 }
 
 export interface User {

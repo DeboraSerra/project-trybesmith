@@ -1,4 +1,4 @@
-import { Pool, ResultSetHeader } from 'mysql2/promise';
+import { Pool, ResultSetHeader, RowDataPacket } from 'mysql2/promise';
 import { Product } from '../interfaces/interface';
 
 class ProductModel {
@@ -28,6 +28,13 @@ class ProductModel {
   public update = async (id: number, orderId: number): Promise<void> => {
     const query = 'UPDATE Trybesmith.Products SET orderId = ? WHERE id = ?';
     await this.connection.execute(query, [orderId, id]);
+  };
+
+  public findOrderById = async (id: number): Promise<number[]> => {
+    const query = 'SELECT * FROM Trybesmith.Products WHERE orderId = ?;';
+    const [products] = await this.connection.execute<RowDataPacket[]>(query, [id]);
+    const ids = products.map((prod) => prod.id);
+    return ids as number[];
   };
 }
 
