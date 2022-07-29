@@ -5,4 +5,4 @@ export default async (err: RequiredError, _req: Request, res: Response, _next: N
   const { code, message } = err;
   if (code) return res.status(code).json({ message });
   res.status(500).json({ message });
-}
+};
