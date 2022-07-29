@@ -1,4 +1,5 @@
 import connection from '../models/connection';
+import { validateProd } from './validations';
 import { Product } from '../interfaces/interface';
 import ProductModel from '../models/product.model';
 
@@ -15,6 +16,7 @@ class ProductService {
   };
 
   public create = async (prod: Product): Promise<Product> => {
+    validateProd(prod);
     const product = await this.model.create(prod);
     return product;
   };

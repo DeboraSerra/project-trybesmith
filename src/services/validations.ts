@@ -4,7 +4,7 @@ import WrongFieldError from '../errors/wrongFieldError';
 
 const validateAmount = (amount: string): void => {
   if (!amount) {
-    throw new RequiredError('"amount" id required');
+    throw new RequiredError('"amount" is required');
   }
   if (typeof amount !== 'string') {
     throw new WrongFieldError('"amount" must be a string');
