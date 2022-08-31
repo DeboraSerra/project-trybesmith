@@ -14,4 +14,9 @@ body {
   background-repeat: repeat-x;
   height: 100vh;
   background-color: var(--lightest-gray);
+  font-family: monospace;
+}
+
+.full-height {
+  height: 100vh;
 }

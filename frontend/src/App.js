@@ -1,16 +1,16 @@
-import logo from './logo.svg';
+import React from 'react';
 import './App.css';
+import Content from './components/Content';
+import Footer from './components/Footer';
+import Header from './components/Header';
 
 function App() {
   return (
-    <div className="container mx-auto bg-green-200 rounded-xl shadow border p-8 m-10">
-      <p className="text-4xl text-gray-700 font-bold mb-5">
-        Welcome!
-      </p>
-      <p className="text-gray-500 text-lg">
-        React and Tailwind CSS in action
-      </p>
-    </div>
+    <section className="w-100 full-height">
+      <Header />
+      <Content />
+      <Footer />
+    </section>
   );
 }
 export default App;
