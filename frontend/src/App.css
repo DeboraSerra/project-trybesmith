@@ -1,0 +1,17 @@
+:root {
+  --dark-brown: #171211;
+  --light-brown: #483b35;
+  --lightest-brown: #c0a188;
+  --dark-gray: #383636;
+  --light-gray: #706f74;
+  --lightest-gray: #cdcacf;
+  --accent: #b82404;
+}
+
+body {
+  background-image: url('./images/flames.png');
+  background-position: bottom left;
+  background-repeat: repeat-x;
+  height: 100vh;
+  background-color: var(--lightest-gray);
+}
