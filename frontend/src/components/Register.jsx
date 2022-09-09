@@ -1,7 +1,8 @@
 import React, { useContext, useEffect, useState } from 'react';
+import PropTypes from 'prop-types';
 import { Context, url } from '../context/Provider';
 
-const Register = ({ close }) => {
+function Register({ close }) {
   const [state, setState] = useState({
     username: '',
     password: '',
@@ -9,7 +10,9 @@ const Register = ({ close }) => {
     classe: '',
     level: 0,
   });
-  const { username, classe, level, password, pass2 } = state;
+  const {
+    username, classe, level, password, pass2,
+  } = state;
   const [valid, setValid] = useState(true);
   const { setProvider } = useContext(Context);
 
@@ -17,52 +20,56 @@ const Register = ({ close }) => {
     setState({
       ...state,
       [name]: value,
-    })
-  }
+    });
+  };
 
   useEffect(() => {
     const isValidUser = typeof username === 'string' && username.length >= 3;
     const isValidClasse = typeof classe === 'string' && classe.length >= 3;
     const isValidLevel = typeof level === 'number' && level >= 1;
     setValid(!isValidUser || !isValidClasse || !isValidLevel);
-  }, [username, classe, level, pass2, password])
+  }, [username, classe, level, pass2, password]);
 
   const handleSubmit = async () => {
     const response = await fetch(`${url}/users`, {
       method: 'POST',
       headers: {
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
       },
       body: JSON.stringify(),
     });
-    const data = await response.json()
+    const data = await response.json();
     localStorage.setItem('token', data);
     setProvider((prevSt) => ({
       ...prevSt,
       token: data,
-    }))
+    }));
     close();
-  }
+  };
 
   return (
-    <form onSubmit={ handleSubmit }>
+    <form onSubmit={handleSubmit}>
       <input
         type="text"
         name="username"
-        value={ username }
-        onChange={ handleChange }
+        value={username}
+        onChange={handleChange}
       />
       <input
         type="password"
         name="password"
-        value={ password }
-        onChange={ handleChange }
+        value={password}
+        onChange={handleChange}
       />
-      <button type="submit" disabled={ valid }>
+      <button type="submit" disabled={valid}>
         Register
       </button>
     </form>
-  )
+  );
 }
+
+Register.propTypes = {
+  close: PropTypes.func.isRequired,
+};
 
 export default Register;

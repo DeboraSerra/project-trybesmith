@@ -3,10 +3,11 @@ import { NavLink } from 'react-router-dom';
 import ReactModal from 'react-modal';
 import { Context } from '../context/Provider';
 import Login from './Login';
+import Register from './Register';
 
-const link = "text-xl hover:opacity-80 active:text-accent";
+const link = 'text-xl hover:opacity-80 active:text-accent';
 
-const Header = () => {
+function Header() {
   const [modal, setModal] = useState(false);
   const { route } = useContext(Context);
   const open = () => setModal(true);
@@ -15,22 +16,23 @@ const Header = () => {
     <header className="w-full flex justify-between p-8">
       <NavLink className="text-4xl" to="/">Welcome to Trybesmith!</NavLink>
       <nav className="grow flex justify-between mx-32">
-        <NavLink className={ link } to="/order">
+        <NavLink className={link} to="/order">
           Order your weapon
         </NavLink>
-        <NavLink className={ link } to="/products">
+        <NavLink className={link} to="/products">
           See products list
         </NavLink>
-        <p className={ link } onClick={ open }>Login</p>
+        <p className={link} onClick={open} role="presentation">Login</p>
       </nav>
       <ReactModal
-        isOpen={ modal }
-        onRequestClose={ close }
+        isOpen={modal}
+        onRequestClose={close}
       >
-        {route === 'login' && <Login close={ close } />}
+        {route === 'login' && <Login close={close} />}
+        {route === 'register' && <Register /> }
       </ReactModal>
     </header>
-  )
+  );
 }
 
 export default Header;

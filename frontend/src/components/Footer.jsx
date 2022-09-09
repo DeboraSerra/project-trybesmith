@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Footer = () => {
+function Footer() {
   return (
     <footer className="absolute bottom-0 w-full flex justify-center">
       <p className="my-5 text-lg text-lightest-gray">
@@ -11,7 +11,7 @@ const Footer = () => {
         </a>
       </p>
     </footer>
-  )
+  );
 }
 
 export default Footer;

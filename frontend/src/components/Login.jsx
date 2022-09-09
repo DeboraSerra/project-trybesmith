@@ -1,7 +1,8 @@
 import React, { useContext, useState } from 'react';
+import PropTypes from 'prop-types';
 import { Context, url } from '../context/Provider';
 
-const Login = ({ close }) => {
+function Login({ close }) {
   const [state, setState] = useState({
     username: '',
     password: '',
@@ -13,38 +14,52 @@ const Login = ({ close }) => {
     setState({
       ...state,
       [name]: value,
-    })
-  }
+    });
+  };
 
   const handleSubmit = async () => {
     const response = await fetch(`${url}/login`);
-    const data = await response.json()
+    const data = await response.json();
     localStorage.setItem('token', data);
     setProvider((prevSt) => ({
       ...prevSt,
       token: data,
-    }))
+      route: '',
+    }));
     close();
-  }
+  };
 
   return (
-    <form onSubmit={ handleSubmit }>
+    <form onSubmit={handleSubmit}>
       <input
         type="text"
         name="username"
-        value={ username }
-        onChange={ handleChange }
+        value={username}
+        onChange={handleChange}
       />
       <input
         type="password"
         name="password"
-        value={ password }
-        onChange={ handleChange }
+        value={password}
+        onChange={handleChange}
       />
       <button type="submit">Login</button>
-      <button type="button">Register</button>
+      <button
+        type="button"
+        onClick={() => setProvider((prevSt) => ({
+          ...prevSt,
+          route: 'register',
+        }))}
+      >
+        Register
+
+      </button>
     </form>
-  )
+  );
 }
+
+Login.propTypes = {
+  close: PropTypes.func.isRequired,
+};
 
 export default Login;

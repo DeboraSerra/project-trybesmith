@@ -1,9 +1,12 @@
-import React, { createContext, useEffect, useState, Component } from 'react';
+import React, {
+  createContext, useEffect, useState, useMemo,
+} from 'react';
+import PropTypes from 'prop-types';
 
 export const Context = createContext();
 export const url = 'http://localhost:3000';
 
-const Provider = ({ children }) => {
+function Provider({ children }) {
   const [state, setState] = useState({
     token: '',
     route: 'login',
@@ -14,18 +17,22 @@ const Provider = ({ children }) => {
     setState({
       ...state,
       token,
-    })
-  }, [])
+    });
+  }, []);
 
-  const value = {
+  const value = useMemo(() => ({
     ...state,
     setProvider: setState,
-  }
+  }), []);
   return (
-    <Context.Provider value={ value }>
+    <Context.Provider value={value}>
       {children}
     </Context.Provider>
-  )
+  );
 }
+
+Provider.propTypes = {
+  children: PropTypes.node.isRequired,
+};
 
 export default Provider;
