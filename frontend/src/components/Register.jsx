@@ -31,14 +31,19 @@ function Register({ close }) {
   }, [username, classe, level, pass2, password]);
 
   const handleSubmit = async () => {
-    const response = await fetch(`${url}/users`, {
+    const obj = {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify(),
-    });
+      body: JSON.stringify(state),
+    }
+    const response = await fetch(`${url}/users`, obj);
     const data = await response.json();
+    console.log(data);
+    if (data.message) {
+      return;
+    }
     localStorage.setItem('token', data);
     setProvider((prevSt) => ({
       ...prevSt,

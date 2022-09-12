@@ -8,6 +8,7 @@ function Login({ close }) {
     password: '',
   });
   const { username, password } = state;
+  const [error, setError] = useState('');
   const { setProvider } = useContext(Context);
 
   const handleChange = ({ target: { name, value } }) => {
@@ -17,9 +18,22 @@ function Login({ close }) {
     });
   };
 
-  const handleSubmit = async () => {
-    const response = await fetch(`${url}/login`);
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const obj = {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(state),
+    }
+    const response = await fetch(`${url}/login`, obj);
     const data = await response.json();
+    console.log(data)
+    if (data.message) {
+      setError(data.message);
+      return;
+    }
     localStorage.setItem('token', data);
     setProvider((prevSt) => ({
       ...prevSt,
@@ -31,6 +45,7 @@ function Login({ close }) {
 
   return (
     <form onSubmit={handleSubmit}>
+      {error && <p>{error}</p>}
       <input
         type="text"
         name="username"

@@ -7,6 +7,8 @@ import Register from './Register';
 
 const link = 'text-xl hover:opacity-80 active:text-accent';
 
+ReactModal.setAppElement('#root');
+
 function Header() {
   const [modal, setModal] = useState(false);
   const { route } = useContext(Context);
