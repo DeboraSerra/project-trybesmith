@@ -4,7 +4,7 @@ import React, {
 import PropTypes from 'prop-types';
 
 export const Context = createContext();
-export const url = 'http://localhost:3000';
+export const url = 'http://localhost:3001';
 
 function Provider({ children }) {
   const [state, setState] = useState({
